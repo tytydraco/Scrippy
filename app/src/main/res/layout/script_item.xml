@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/delete"
                     style="@style/ScriptItem.Action"
-                    android:src="@drawable/ic_baseline_ac_unit_24"
+                    android:src="@drawable/ic_baseline_delete_24"
                     android:contentDescription="@string/delete"
                     android:background="@android:color/transparent" />
                 <ImageButton
@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/edit"
                     style="@style/ScriptItem.Action"
-                    android:src="@drawable/ic_baseline_ac_unit_24"
+                    android:src="@drawable/ic_baseline_edit_24"
                     android:contentDescription="@string/edit"
                     android:background="@android:color/transparent" />
                 <ImageButton
@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/run"
                     style="@style/ScriptItem.Action"
-                    android:src="@drawable/ic_baseline_ac_unit_24"
+                    android:src="@drawable/ic_baseline_play_arrow_24"
                     android:contentDescription="@string/run"
                     android:background="@android:color/transparent" />
             </LinearLayout>

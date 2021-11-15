@@ -1,9 +1,6 @@
 package com.draco.scrippy.database
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface ScriptDao {
@@ -12,6 +9,9 @@ interface ScriptDao {
 
     @Insert
     fun insert(vararg script: Script)
+
+    @Update
+    fun update(vararg script: Script)
 
     @Delete
     fun delete(script: Script)

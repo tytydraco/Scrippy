@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private val executorService = Executors.newFixedThreadPool(1)
 
-    fun getScripts(callback: (scripts: Array<Script>) -> Unit) {
+    private fun getScripts(callback: (scripts: Array<Script>) -> Unit) {
         executorService.execute {
             callback(db.scriptDao().getAll())
         }

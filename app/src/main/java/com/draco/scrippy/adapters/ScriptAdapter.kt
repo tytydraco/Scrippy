@@ -2,6 +2,7 @@ package com.draco.scrippy.adapters
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import androidx.room.Room
 import com.draco.scrippy.R
 import com.draco.scrippy.database.Script
 import com.draco.scrippy.database.ScriptDatabase
+import com.draco.scrippy.ui.EditActivity
 import java.util.concurrent.Executors
 
 class ScriptAdapter(private val scripts: Array<Script>) :
@@ -73,7 +75,11 @@ class ScriptAdapter(private val scripts: Array<Script>) :
             areYouSure(holder.itemView.context, position)
         }
 
-        holder.edit.setOnClickListener {  }
+        holder.edit.setOnClickListener {
+            val intent = Intent(holder.itemView.context, EditActivity::class.java)
+                .putExtra("position", position)
+            holder.itemView.context.startActivity(intent)
+        }
 
         holder.run.setOnClickListener {  }
     }

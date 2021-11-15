@@ -4,6 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.38125" />
+        <entry key="app/src/main/res/drawable/baseline_edit_24.xml" value="0.332" />
+        <entry key="app/src/main/res/drawable/ic_baseline_ac_unit_24.xml" value="0.332" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.332" />
+        <entry key="app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.332" />
+        <entry key="app/src/main/res/drawable/ic_baseline_file_upload_24.xml" value="0.332" />
+        <entry key="app/src/main/res/drawable/ic_baseline_play_arrow_24.xml" value="0.332" />
+        <entry key="app/src/main/res/layout/activity_edit.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.17147922998986828" />
         <entry key="app/src/main/res/layout/script_item.xml" value="0.33" />
         <entry key="app/src/main/res/menu/main.xml" value="0.178125" />
