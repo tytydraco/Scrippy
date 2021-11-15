@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var db: ScriptDatabase
 
-    val executorService = Executors.newFixedThreadPool(4)
+    private val executorService = Executors.newFixedThreadPool(1)
 
     fun getScripts(callback: (scripts: Array<Script>) -> Unit) {
         executorService.execute {

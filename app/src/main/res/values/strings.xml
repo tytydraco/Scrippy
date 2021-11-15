@@ -7,4 +7,10 @@
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="run">Run</string>
+
+    <string name="are_you_sure_title">Are you sure?</string>
+    <string name="are_you_sure_message">This action is permanent.</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
 </resources>
