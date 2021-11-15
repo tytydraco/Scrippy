@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.draco.scrippy.R
-import com.draco.scrippy.models.Script
+import com.draco.scrippy.database.Script
 
 class ScriptAdapter(private val scripts: Array<Script>) :
     RecyclerView.Adapter<ScriptAdapter.ViewHolder>() {

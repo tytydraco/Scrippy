@@ -1,4 +1,4 @@
-package com.draco.scrippy
+package com.draco.scrippy.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,34 +7,47 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import com.draco.scrippy.R
 import com.draco.scrippy.adapters.ScriptAdapter
-import com.draco.scrippy.models.Script
+import com.draco.scrippy.database.ScriptDatabase
+import com.draco.scrippy.database.Script
+import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recycler: RecyclerView
     private lateinit var adapter: ScriptAdapter
 
+    private lateinit var db: ScriptDatabase
+
+    val executorService = Executors.newFixedThreadPool(4)
+
+    fun getScripts(callback: (scripts: Array<Script>) -> Unit) {
+        executorService.execute {
+            callback(db.scriptDao().getAll())
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        db = Room.databaseBuilder(
+            this,
+            ScriptDatabase::class.java,
+            ScriptDatabase.NAME
+        ).build()
+
         recycler = findViewById(R.id.recycler)
 
-        adapter = ScriptAdapter(
-            arrayOf(
-                Script("Hello world 0", "echo Hello World!"),
-                Script("Hello world 1", "echo Hello World!"),
-                Script("Hello world 2", "echo Hello World!"),
-                Script("Hello world 3", "echo Hello World!"),
-                Script("Hello world 4", "echo Hello World!"),
-                Script("Hello world 5", "echo Hello World!"),
-                Script("Hello world 6", "echo Hello World!"),
-                Script("Hello world 7", "echo Hello World!"),
-                Script("Hello world 8", "echo Hello World!"),
+        getScripts {
+            adapter = ScriptAdapter(
+                it
             )
-        )
 
-        recycler.adapter = adapter
+            recycler.adapter = adapter
+        }
+
         recycler.layoutManager = LinearLayoutManager(this)
     }
 
