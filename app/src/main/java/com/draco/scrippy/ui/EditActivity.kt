@@ -10,6 +10,7 @@ import com.draco.scrippy.database.ScriptDatabase
 import java.util.concurrent.Executors
 
 class EditActivity: AppCompatActivity() {
+    private lateinit var name: EditText
     private lateinit var code: EditText
 
     private lateinit var db: ScriptDatabase
@@ -22,6 +23,7 @@ class EditActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
 
+        name = findViewById(R.id.name)
         code = findViewById(R.id.code)
 
         db = Room.databaseBuilder(
@@ -40,6 +42,7 @@ class EditActivity: AppCompatActivity() {
     override fun onPause() {
         super.onPause()
 
+        script.name = name.text.toString()
         script.contents = code.text.toString()
 
         executorService.execute {
