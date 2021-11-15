@@ -5,7 +5,9 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Script(
-    @PrimaryKey val id: Int,
     var name: String,
     var contents: String
-)
+) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Int? = null
+}

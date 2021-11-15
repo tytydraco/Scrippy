@@ -1,5 +1,6 @@
 package com.draco.scrippy.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -11,7 +12,6 @@ import androidx.room.Room
 import com.draco.scrippy.R
 import com.draco.scrippy.adapters.ScriptAdapter
 import com.draco.scrippy.database.ScriptDatabase
-import com.draco.scrippy.database.Script
 import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
@@ -22,9 +22,14 @@ class MainActivity : AppCompatActivity() {
 
     private val executorService = Executors.newFixedThreadPool(1)
 
-    private fun getScripts(callback: (scripts: Array<Script>) -> Unit) {
+    private fun updateScripts() {
         executorService.execute {
-            callback(db.scriptDao().getAll())
+            val scripts = db.scriptDao().getAll()
+            adapter.scripts = scripts.toMutableList()
+
+            runOnUiThread {
+                adapter.notifyDataSetChanged()
+            }
         }
     }
 
@@ -39,16 +44,9 @@ class MainActivity : AppCompatActivity() {
         ).build()
 
         recycler = findViewById(R.id.recycler)
-
-        getScripts {
-            adapter = ScriptAdapter(
-                it
-            )
-
-            recycler.adapter = adapter
-        }
-
+        adapter = ScriptAdapter()
         recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = adapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -62,9 +60,16 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.create -> {
+                val intent = Intent(this, EditActivity::class.java)
+                startActivity(intent)
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateScripts()
     }
 }

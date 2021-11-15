@@ -17,7 +17,7 @@ import com.draco.scrippy.ui.EditActivity
 import com.draco.scrippy.ui.RunActivity
 import java.util.concurrent.Executors
 
-class ScriptAdapter(private val scripts: Array<Script>) :
+class ScriptAdapter(var scripts: MutableList<Script> = mutableListOf()) :
     RecyclerView.Adapter<ScriptAdapter.ViewHolder>() {
     private lateinit var db: ScriptDatabase
 
@@ -48,7 +48,7 @@ class ScriptAdapter(private val scripts: Array<Script>) :
         return ViewHolder(binding)
     }
 
-    private fun areYouSure(context: Context, position: Int) {
+    private fun delete(context: Context, position: Int) {
         val script = scripts[position]
 
         AlertDialog.Builder(context)
@@ -56,6 +56,7 @@ class ScriptAdapter(private val scripts: Array<Script>) :
                 setTitle(R.string.are_you_sure_title)
                 setMessage(R.string.are_you_sure_message)
                 setPositiveButton(R.string.confirm) { _, _ ->
+                    scripts.removeAt(position)
                     executorService.execute {
                         db.scriptDao().delete(script)
                     }
@@ -73,7 +74,7 @@ class ScriptAdapter(private val scripts: Array<Script>) :
         holder.name.text = script.name
 
         holder.delete.setOnClickListener {
-            areYouSure(holder.itemView.context, position)
+            delete(holder.itemView.context, position)
         }
 
         holder.edit.setOnClickListener {
@@ -88,4 +89,6 @@ class ScriptAdapter(private val scripts: Array<Script>) :
             holder.itemView.context.startActivity(intent)
         }
     }
+
+    override fun getItemId(position: Int) = scripts[position].id?.toLong() ?: -1
 }

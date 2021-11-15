@@ -5,7 +5,7 @@ import androidx.room.*
 @Dao
 interface ScriptDao {
     @Query("SELECT * FROM Script")
-    fun getAll(): Array<Script>
+    fun getAll(): List<Script>
 
     @Insert
     fun insert(vararg script: Script)

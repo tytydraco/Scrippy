@@ -18,6 +18,7 @@ class EditActivity: AppCompatActivity() {
     private val executorService = Executors.newFixedThreadPool(1)
 
     private lateinit var script: Script
+    private var position: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,21 +33,32 @@ class EditActivity: AppCompatActivity() {
             ScriptDatabase.NAME
         ).build()
 
-        val position = intent.getIntExtra("position", 0)
-        executorService.execute {
-            script = db.scriptDao().getAll()[position]
-            code.setText(script.contents)
+        position = intent.getIntExtra("position", -1)
+
+        if (position != -1) {
+            executorService.execute {
+                script = db.scriptDao().getAll()[position]
+                name.setText(script.name)
+                code.setText(script.contents)
+            }
+        } else {
+            script = Script("", "")
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-
+    override fun onBackPressed() {
         script.name = name.text.toString()
         script.contents = code.text.toString()
 
         executorService.execute {
-            db.scriptDao().update(script)
+            if (position != -1)
+                db.scriptDao().update(script)
+            else
+                db.scriptDao().insert(script)
+
+            runOnUiThread {
+                super.onBackPressed()
+            }
         }
     }
 }
