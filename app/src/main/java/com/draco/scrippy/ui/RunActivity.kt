@@ -8,8 +8,11 @@ import androidx.room.Room
 import com.draco.scrippy.R
 import com.draco.scrippy.database.Script
 import com.draco.scrippy.database.ScriptDatabase
+import com.draco.scrippy.utils.OutputBuffer
+import java.lang.Exception
+import java.nio.CharBuffer
 import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicBoolean
 
 class RunActivity : AppCompatActivity() {
     private lateinit var output: TextView
@@ -17,6 +20,9 @@ class RunActivity : AppCompatActivity() {
     private lateinit var db: ScriptDatabase
 
     private val executorService = Executors.newFixedThreadPool(1)
+
+    private var process: Process? = null
+    private var scanForOutput = AtomicBoolean(true)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,18 +47,34 @@ class RunActivity : AppCompatActivity() {
         val contents = script.contents
 
         executorService.execute {
-            val process = ProcessBuilder("sh", "-c", contents)
+            process = ProcessBuilder("sh", "-c", contents)
                 .directory(externalCacheDir)
+                .redirectErrorStream(true)
                 .start()
-                .also {
-                    it.waitFor()
-                }
 
-            val out = process.inputStream.bufferedReader().use { it.readText() }
-            Log.d("OUTPUT", out)
-            runOnUiThread {
-                output.text = out
+            val buffer = OutputBuffer(128)
+            process?.inputStream?.bufferedReader().use {
+                while (scanForOutput.get()) {
+                    try {
+                        val line = it?.readLine() ?: break
+                        buffer.add(line)
+
+                        val out = buffer.get()
+                        runOnUiThread {
+                            output.text = out
+                        }
+                    } catch (_: Exception) {
+                        scanForOutput.set(false)
+                        return@execute
+                    }
+                }
             }
         }
+    }
+
+    override fun onDestroy() {
+        scanForOutput.set(false)
+        process?.destroy()
+        super.onDestroy()
     }
 }

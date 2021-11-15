@@ -37,15 +37,13 @@ class EditActivity: AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
+    override fun onPause() {
+        super.onPause()
+
         script.contents = code.text.toString()
 
         executorService.execute {
             db.scriptDao().update(script)
-
-            runOnUiThread {
-                super.onBackPressed()
-            }
         }
     }
 }
