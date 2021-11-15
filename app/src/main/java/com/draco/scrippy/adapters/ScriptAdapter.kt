@@ -26,7 +26,6 @@ class ScriptAdapter(var scripts: MutableList<Script> = mutableListOf()) :
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.name)
         val delete: ImageButton = view.findViewById(R.id.delete)
-        val edit: ImageButton = view.findViewById(R.id.edit)
         val run: ImageButton = view.findViewById(R.id.run)
     }
 
@@ -77,7 +76,7 @@ class ScriptAdapter(var scripts: MutableList<Script> = mutableListOf()) :
             delete(holder.itemView.context, position)
         }
 
-        holder.edit.setOnClickListener {
+        holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, EditActivity::class.java)
                 .putExtra("position", position)
             holder.itemView.context.startActivity(intent)

@@ -38,14 +38,6 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/edit"
-                    style="@style/ScriptItem.Action"
-                    android:src="@drawable/ic_baseline_edit_24"
-                    android:contentDescription="@string/edit"
-                    android:background="@android:color/transparent" />
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/run"
                     style="@style/ScriptItem.Action"
                     android:src="@drawable/ic_baseline_play_arrow_24"
