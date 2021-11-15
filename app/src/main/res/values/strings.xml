@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Scrippy</string>
 
+    <string name="upload">Upload</string>
+    <string name="create">Create</string>
+
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="run">Run</string>
