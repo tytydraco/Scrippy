@@ -32,7 +32,7 @@ class EditActivity: AppCompatActivity() {
 
         val position = intent.getIntExtra("position", 0)
         executorService.execute {
-            script = db.scriptDao().getAll().get(position)
+            script = db.scriptDao().getAll()[position]
             code.setText(script.contents)
         }
     }

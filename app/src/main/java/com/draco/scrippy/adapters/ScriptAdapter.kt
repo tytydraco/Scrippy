@@ -14,6 +14,7 @@ import com.draco.scrippy.R
 import com.draco.scrippy.database.Script
 import com.draco.scrippy.database.ScriptDatabase
 import com.draco.scrippy.ui.EditActivity
+import com.draco.scrippy.ui.RunActivity
 import java.util.concurrent.Executors
 
 class ScriptAdapter(private val scripts: Array<Script>) :
@@ -81,6 +82,10 @@ class ScriptAdapter(private val scripts: Array<Script>) :
             holder.itemView.context.startActivity(intent)
         }
 
-        holder.run.setOnClickListener {  }
+        holder.run.setOnClickListener {
+            val intent = Intent(holder.itemView.context, RunActivity::class.java)
+                .putExtra("position", position)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 }
