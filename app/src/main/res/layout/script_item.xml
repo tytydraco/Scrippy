@@ -6,12 +6,52 @@
     style="@style/ScriptItem">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         style="@style/ScriptItem.CardView">
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/name"
-            style="@style/ScriptItem.Text" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/name"
+                style="@style/ScriptItem.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/actions"
+                android:layout_alignParentStart="true"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/actions"
+                android:orientation="horizontal"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/delete"
+                    style="@style/ScriptItem.Action"
+                    android:src="@drawable/ic_baseline_ac_unit_24"
+                    android:contentDescription="@string/delete"
+                    android:background="@android:color/transparent" />
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit"
+                    style="@style/ScriptItem.Action"
+                    android:src="@drawable/ic_baseline_ac_unit_24"
+                    android:contentDescription="@string/edit"
+                    android:background="@android:color/transparent" />
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/run"
+                    style="@style/ScriptItem.Action"
+                    android:src="@drawable/ic_baseline_ac_unit_24"
+                    android:contentDescription="@string/run"
+                    android:background="@android:color/transparent" />
+            </LinearLayout>
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
