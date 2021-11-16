@@ -3,6 +3,7 @@ package com.draco.scrippy.adapters
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,19 +48,18 @@ class ScriptAdapter(var scripts: MutableList<Script> = mutableListOf()) :
         return ViewHolder(binding)
     }
 
-    private fun delete(context: Context, position: Int) {
-        val script = scripts[position]
-
+    private fun delete(context: Context, id: Int) {
         AlertDialog.Builder(context)
             .apply {
                 setTitle(R.string.delete_title)
                 setMessage(R.string.delete_message)
                 setPositiveButton(R.string.confirm) { _, _ ->
-                    scripts.removeAt(position)
+                    val script = scripts.find { it.id == id } ?: return@setPositiveButton
+                    scripts.remove(script)
+                    notifyDataSetChanged()
                     executorService.execute {
                         db.scriptDao().delete(script)
                     }
-                    notifyItemRemoved(position)
                 }
                 setNegativeButton(R.string.cancel, null)
             }
@@ -73,7 +73,9 @@ class ScriptAdapter(var scripts: MutableList<Script> = mutableListOf()) :
         holder.name.text = script.name
 
         holder.delete.setOnClickListener {
-            delete(holder.itemView.context, position)
+            script.id?.let {
+                delete(holder.itemView.context, it)
+            }
         }
 
         holder.itemView.setOnClickListener {
