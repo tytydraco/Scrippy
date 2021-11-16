@@ -10,7 +10,6 @@
         android:id="@+id/name"
         style="@style/Edit.Name"
         android:hint="@string/hint_name"
-        android:inputType="text"
         android:importantForAutofill="no" />
 
     <EditText
@@ -19,7 +18,6 @@
         android:id="@+id/code"
         style="@style/Edit.Code"
         android:hint="@string/hint_code"
-        android:inputType="text"
         android:importantForAutofill="no" />
 
 </LinearLayout>
