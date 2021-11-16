@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/upload"
         android:icon="@drawable/ic_baseline_file_upload_24"
         android:title="@string/upload"
-        app:showAsAction="ifRoom" />
+        android:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/create"
         android:icon="@drawable/ic_baseline_add_24"
         android:title="@string/create"
-        app:showAsAction="always" />
+        android:showAsAction="ifRoom" />
 </menu>
