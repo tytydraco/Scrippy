@@ -23,6 +23,8 @@ class EditActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
 
+        supportActionBar?.elevation = 0f
+
         name = findViewById(R.id.name)
         code = findViewById(R.id.code)
 
@@ -33,6 +35,8 @@ class EditActivity: AppCompatActivity() {
         ).build()
 
         val id = intent.getIntExtra("id", -1)
+
+        code.requestFocus()
 
         executorService.execute {
             script = db.scriptDao().get(id)
