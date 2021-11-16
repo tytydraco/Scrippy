@@ -9,13 +9,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/name"
         style="@style/Edit.Name"
-        android:hint="@string/hint_name" />
+        android:hint="@string/hint_name"
+        android:inputType="text"
+        android:importantForAutofill="no" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/code"
         style="@style/Edit.Code"
-        android:hint="@string/hint_code" />
+        android:hint="@string/hint_code"
+        android:inputType="text"
+        android:importantForAutofill="no" />
 
 </LinearLayout>

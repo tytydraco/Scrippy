@@ -1,7 +1,6 @@
 package com.draco.scrippy.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
@@ -9,8 +8,6 @@ import com.draco.scrippy.R
 import com.draco.scrippy.database.Script
 import com.draco.scrippy.database.ScriptDatabase
 import com.draco.scrippy.utils.OutputBuffer
-import java.lang.Exception
-import java.nio.CharBuffer
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
 

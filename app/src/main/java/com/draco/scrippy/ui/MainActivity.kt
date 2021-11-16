@@ -1,13 +1,11 @@
 package com.draco.scrippy.ui
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
@@ -25,9 +23,9 @@ class MainActivity : AppCompatActivity() {
 
     private val executorService = Executors.newFixedThreadPool(1)
 
-    private val upload = registerForActivityResult(ActivityResultContracts.GetContent()) {
+    private val upload = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         contentResolver
-            .openInputStream(it)
+            .openInputStream(uri)
             ?.bufferedReader()
             .use {
                 val content = it?.readText() ?: ""
