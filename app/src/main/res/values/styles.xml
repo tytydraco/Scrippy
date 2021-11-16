@@ -42,5 +42,10 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:inputType">textMultiLine|textNoSuggestions</item>
         <item name="android:gravity">top</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
+    <style name="Run.Output" parent="Widget.AppCompat.TextView">
+        <item name="android:padding">4dp</item>
     </style>
 </resources>
