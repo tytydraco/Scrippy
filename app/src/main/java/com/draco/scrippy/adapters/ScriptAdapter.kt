@@ -78,13 +78,13 @@ class ScriptAdapter(var scripts: MutableList<Script> = mutableListOf()) :
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, EditActivity::class.java)
-                .putExtra("position", position)
+                .putExtra("id", script.id)
             holder.itemView.context.startActivity(intent)
         }
 
         holder.run.setOnClickListener {
             val intent = Intent(holder.itemView.context, RunActivity::class.java)
-                .putExtra("position", position)
+                .putExtra("id", script.id)
             holder.itemView.context.startActivity(intent)
         }
     }

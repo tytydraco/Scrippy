@@ -36,9 +36,9 @@ class RunActivity : AppCompatActivity() {
             ScriptDatabase.NAME
         ).build()
 
-        val position = intent.getIntExtra("position", 0)
+        val id = intent.getIntExtra("id", 0)
         executorService.execute {
-            val script = db.scriptDao().getAll()[position]
+            val script = db.scriptDao().get(id)
             runScript(script)
         }
     }

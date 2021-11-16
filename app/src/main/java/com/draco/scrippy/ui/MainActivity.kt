@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.draco.scrippy.R
 import com.draco.scrippy.adapters.ScriptAdapter
+import com.draco.scrippy.database.Script
 import com.draco.scrippy.database.ScriptDatabase
 import java.util.concurrent.Executors
 
@@ -29,8 +30,13 @@ class MainActivity : AppCompatActivity() {
             .openInputStream(it)
             ?.bufferedReader()
             .use {
-                val text = it?.readText() ?: ""
+                val content = it?.readText() ?: ""
+                val script = Script("Uploaded", content)
 
+                executorService.execute {
+                    db.scriptDao().insert(script)
+                    updateScripts()
+                }
             }
     }
 
@@ -57,6 +63,9 @@ class MainActivity : AppCompatActivity() {
 
         recycler = findViewById(R.id.recycler)
         adapter = ScriptAdapter()
+            .also {
+                it.setHasStableIds(true)
+            }
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = adapter
     }
@@ -69,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.upload -> {
-                upload.launch("")
+                upload.launch("*/*")
                 true
             }
             R.id.create -> {

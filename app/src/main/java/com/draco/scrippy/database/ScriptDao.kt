@@ -7,6 +7,9 @@ interface ScriptDao {
     @Query("SELECT * FROM Script")
     fun getAll(): List<Script>
 
+    @Query("SELECT * FROM SCRIPT WHERE id = :id")
+    fun get(id: Int): Script
+
     @Insert
     fun insert(vararg script: Script)
 
