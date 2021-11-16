@@ -7,8 +7,8 @@
     <string name="delete">Delete</string>
     <string name="run">Run</string>
 
-    <string name="are_you_sure_title">Are you sure?</string>
-    <string name="are_you_sure_message">This action is permanent.</string>
+    <string name="delete_title">Confirm deletion</string>
+    <string name="delete_message">This script will be permanently deleted from the database.</string>
 
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>

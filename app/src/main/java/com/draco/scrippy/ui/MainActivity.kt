@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
@@ -21,6 +23,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var db: ScriptDatabase
 
     private val executorService = Executors.newFixedThreadPool(1)
+
+    private val upload = registerForActivityResult(ActivityResultContracts.GetContent()) {
+        contentResolver
+            .openInputStream(it)
+            ?.bufferedReader()
+            .use {
+                val text = it?.readText() ?: ""
+
+            }
+    }
 
     private fun updateScripts() {
         executorService.execute {
@@ -57,6 +69,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.upload -> {
+                upload.launch("")
                 true
             }
             R.id.create -> {

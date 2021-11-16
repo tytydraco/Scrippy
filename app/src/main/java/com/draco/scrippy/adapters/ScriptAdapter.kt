@@ -52,8 +52,8 @@ class ScriptAdapter(var scripts: MutableList<Script> = mutableListOf()) :
 
         AlertDialog.Builder(context)
             .apply {
-                setTitle(R.string.are_you_sure_title)
-                setMessage(R.string.are_you_sure_message)
+                setTitle(R.string.delete_title)
+                setMessage(R.string.delete_message)
                 setPositiveButton(R.string.confirm) { _, _ ->
                     scripts.removeAt(position)
                     executorService.execute {
