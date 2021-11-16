@@ -43,7 +43,9 @@ class MainActivity : AppCompatActivity() {
     private fun updateScripts() {
         executorService.execute {
             val scripts = db.scriptDao().getAll()
-            adapter.scripts = scripts.toMutableList()
+            adapter.scripts = scripts
+                .sortedBy { it.name.lowercase() }
+                .toMutableList()
 
             runOnUiThread {
                 adapter.notifyDataSetChanged()

@@ -27,5 +27,4 @@
             android:windowSoftInputMode="stateVisible" />
         <activity android:name=".ui.RunActivity" />
     </application>
-
 </manifest>
