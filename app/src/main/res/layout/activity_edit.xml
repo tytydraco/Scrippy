@@ -8,15 +8,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/name"
-        android:inputType="textNoSuggestions"
-        android:background="@android:color/transparent" />
+        style="@style/Edit.Name"
+        android:hint="@string/hint_name" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/code"
-        android:inputType="textMultiLine|textNoSuggestions"
-        android:background="@android:color/transparent"
-        android:gravity="top" />
+        style="@style/Edit.Code"
+        android:hint="@string/hint_code" />
 
 </LinearLayout>

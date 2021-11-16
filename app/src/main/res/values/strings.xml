@@ -12,4 +12,7 @@
 
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
+
+    <string name="hint_name">Script name</string>
+    <string name="hint_code">echo Hello World!</string>
 </resources>

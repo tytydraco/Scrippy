@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             ?.bufferedReader()
             .use {
                 val content = it?.readText() ?: ""
-                val script = Script("Uploaded", content)
+                val script = Script("Uploaded script", content)
 
                 executorService.execute {
                     db.scriptDao().insert(script)
@@ -82,8 +82,12 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.create -> {
-                val intent = Intent(this, EditActivity::class.java)
-                startActivity(intent)
+                val script = Script("New script", "")
+
+                executorService.execute {
+                    db.scriptDao().insert(script)
+                    updateScripts()
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)

@@ -20,11 +20,25 @@
         <item name="cardCornerRadius">8dp</item>
     </style>
 
-    <style name="ScriptItem.Text" parent="TextAppearance.AppCompat.Headline">
+    <style name="ScriptItem.Text" parent="TextAppearance.AppCompat.Button">
     </style>
 
     <style name="ScriptItem.Action" parent="Widget.AppCompat.ImageButton">
-        <item name="android:layout_marginStart">4dp</item>
-        <item name="android:layout_marginEnd">4dp</item>
+        <item name="android:paddingStart">4dp</item>
+        <item name="android:paddingEnd">4dp</item>
+    </style>
+
+    <style name="Edit.Name" parent="Widget.AppCompat.EditText">
+        <item name="android:background">?colorPrimary</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Edit.Code" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:inputType">textMultiLine|textNoSuggestions</item>
+        <item name="android:gravity">top</item>
     </style>
 </resources>
